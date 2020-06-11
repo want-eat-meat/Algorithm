@@ -24,7 +24,7 @@ package 算法集合;
 //
 // Related Topics 数组 二分查找 分治算法
 
-public class _4两个正序数组的中位数 {
+public class _4_两个正序数组的中位数 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int lenght1 = nums1.length;
         int lenght2 = nums2.length;
