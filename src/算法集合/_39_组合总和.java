@@ -1,9 +1,3 @@
-package 算法集合;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 //给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 //
 // candidates 中的数字可以无限制重复被选取。
@@ -35,6 +29,11 @@ import java.util.List;
 //  [3,5]
 //]
 // Related Topics 数组 回溯算法
+package 算法集合;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 2ms
