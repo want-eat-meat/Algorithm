@@ -42,10 +42,7 @@ import java.util.List;
  * 37.5MB
  */
 public class _60_第k个排列 {
-    public static void main(String[] args) {
-        getPermutation(1, 1);
-    }
-    public static String getPermutation(int n, int k) {
+    public String getPermutation(int n, int k) {
         StringBuilder sb = new StringBuilder(n);
         if(n == 1 && k == 1) return String.valueOf(n);
         int[] product  = new int[n + 1];
