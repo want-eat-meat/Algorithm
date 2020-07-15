@@ -66,12 +66,13 @@ package 算法集合51_100;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 贪心
+ * 1ma
+ * 38.1MB
+ */
 public class _68_文本左右对齐 {
-    public static void main(String[] args) {
-        String[] strs = {"Science","is","what","we","understand","well","enough","to","explain", "to","a","computer.","Art","is","everything","else","we","do"};
-        fullJustify(strs, 20);
-    }
-    public static List<String> fullJustify(String[] words, int maxWidth) {
+    public List<String> fullJustify(String[] words, int maxWidth) {
         List<String> res = new ArrayList<>();
         List<List<String>> group = new ArrayList<>();
         List<Integer> sizes = new ArrayList<>();
@@ -93,39 +94,36 @@ public class _68_文本左右对齐 {
         }
         for(List<String> list : group){
             StringBuilder sb = new StringBuilder(maxWidth);
-            //最后一行处理
-            if(group.indexOf(list) == group.size() - 1){
+            //最后一行、一行只有一个单词处理
+            if(group.indexOf(list) == group.size() - 1 || list.size() == 1){
                 for(int i = 0; i < list.size(); i++){
                     if(i != 0){
                         sb.append(" ");
                     }
                     sb.append(list.get(i));
                 }
-                for(int i = sb.length(); i <= maxWidth; i++){
+                for(int i = sb.length(); i < maxWidth; i++){
                     sb.append(" ");
                 }
             }else {
                 //其他行处理
-                for (int i = 0; i < list.size(); i++) {
-                    if (i == 0) {
-                    } else if (i != list.size() - 1) {
-                        int space = (maxWidth - sizes.get(i)) / list.size();
-                        space = (maxWidth - sizes.get(i)) % list.size() == 0 ? space : space + 1;
-                        for (int j = 0; j < space; j++) {
+                int sumLen = sizes.get(group.indexOf(list));
+                int spaceAvg = (maxWidth - sumLen) / (list.size() - 1);
+                int odd = maxWidth - sumLen - spaceAvg * (list.size() - 1);
+                for(int i = 0; i < list.size(); i++){
+                    if(i == 0){
+                        sb.append(list.get(i));
+                    }else{
+                        int spaceLen = odd > 0 ? spaceAvg + 1 : spaceAvg;
+                        for(int j = 0; j < spaceLen; j++){
                             sb.append(" ");
                         }
-                    } else {
-                        for (int j = sb.length() + list.get(i).length(); j <= maxWidth; j++) {
-                            sb.append(" ");
-                        }
+                        odd--;
+                        sb.append(list.get(i));
                     }
-                    sb.append(list.get(i));
                 }
             }
             res.add(sb.toString());
-        }
-        for(String str : res){
-            System.out.println(str);
         }
         return res;
     }
