@@ -36,23 +36,25 @@
 package 算法集合51_100;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * 1ms
+ * 37.6MB
+ */
 public class _89_格雷编码 {
     public List<Integer> grayCode(int n) {
         List<Integer> result = new ArrayList<>();
-        int number = 2 << n;
-        Set<Integer> set = new HashSet<>(number);
         result.add(0);
-        rollBack(number, result);
-        return result;
-    }
-
-    private void rollBack(int number, List<Integer> result) {
-        if(number == 0){
-            return;
+        if(n == 0) return result;
+        result.add(1);
+        int step = 2;
+        for(int i = 1; i < n; i++){
+            for(int j = result.size(); j > 0; j--){
+                result.add(step + result.get(j-1));
+            }
+            step <<= 1;
         }
+        return result;
     }
 }

@@ -54,19 +54,42 @@
 // Related Topics 字符串 动态规划
 package 算法集合51_100;
 
+/**
+ * 动态规划
+ * 我是垃圾
+ * 8ms
+ * 39.9MB
+ */
 public class _87_扰乱字符串 {
     public boolean isScramble(String s1, String s2) {
-            int len = s1.length();
-            if(s1.length() != s2.length()) return false;
-            if(s1.length() == 1 && s2.length() == 1 && s1.equals(s2)){
-                return true;
-            }
-            for(int i = 1; i < s1.length(); i++){
-                if((isScramble(s1.substring(0, i), s2.substring(0, i)) && isScramble(s1.substring(i, len), s2.substring(i, len)))
-                || (isScramble(s1.substring(0, i), s2.substring(len - i)) && isScramble(s1.substring(i, len), s2.substring(0, len - i)))){
-                    return true;
+            char[] c1 = s1.toCharArray();
+            char[] c2 = s2.toCharArray();
+            int len1 = s1.length();
+            int len2 = s2.length();
+            if(len1 != len2) return false;
+
+            boolean[][][] dp = new boolean[len1][len2][len1 + 1];
+
+            for(int i = 0; i < len1; i++){
+                for(int j = 0; j < len2; j++){
+                    dp[i][j][1] = c1[i] == c2[j];
                 }
             }
-        return false;
+            for(int len = 2; len <= len1; len++){
+                for(int i = 0; i <= len1 - len; i++){
+                    for(int j = 0; j <= len1 - len; j++){
+                        for(int k = 1; k < len; k++){
+                            if(dp[i][j][k] && dp[i + k][j + k][len - k]){
+                                dp[i][j][len] = true;
+                                break;
+                            }else if(dp[i][j + len - k][k] && dp[i + k][j][len - k]){
+                                dp[i][j][len] = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        return dp[0][0][len1];
     }
 }
