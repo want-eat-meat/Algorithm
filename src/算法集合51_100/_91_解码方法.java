@@ -24,15 +24,36 @@
 // Related Topics 字符串 动态规划
 package 算法集合51_100;
 
+/**
+ * 动态规划
+ * 1ms
+ * 37.8MB
+ */
 public class _91_解码方法 {
-    public static void main(String[] args) {
-    }
     public int numDecodings(String s) {
-        char[] nums = s.toCharArray();
-        int result = 0;
-        if(nums.length == 0) return result;
-
-
-        return result;
+        char[] c = s.toCharArray();
+        int len = s.length();
+        int[] dp = new int[len + 1];
+        if(len == 0) return 0;
+        dp[0] = 1;
+        if(c[0] == '0'){
+            return 0;
+        }
+        dp[1] = 1;
+        for(int i = 1; i < len; i++){
+            if(c[i] == '0'){
+                if(c[i-1] == '1' || c[i-1] == '2'){
+                    dp[i + 1] = dp[i - 1];
+                }else{
+                    return 0;
+                }
+            }else{
+                dp[i+1] = dp[i];
+                if(c[i - 1] != '0' && (c[i-1] == '1' || (c[i - 1] == '2'&& c[i] <= '6'))){
+                    dp[i+1] += dp[i-1];
+                }
+            }
+        }
+        return dp[len];
     }
 }
