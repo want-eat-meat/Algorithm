@@ -54,6 +54,10 @@ package 算法集合51_100;
 
 import source.TreeNode;
 
+/**
+ * 3ms
+ * 40.1MB
+ */
 public class _99_恢复二叉搜索树 {
     public void recoverTree(TreeNode root) {
         if(root == null) return;
@@ -64,19 +68,46 @@ public class _99_恢复二叉搜索树 {
 
         while(root != null){
             if(root.left != null){
+                //左节点不为空
                 temp = root.left;
+                //前驱节点找到当前节点下最后遍历到的节点
                 while(temp.right != null && temp.right != root){
                     temp = temp.right;
                 }
+                //前驱节点无右子节点时，其为当前节点下最后那遍历到的节点，将其右子节点指向当前节点
+                if(temp.right == null){
+                    temp.right = root;
+                    root = root.left;
+                }
+                //前驱节点的右子节点指向当前节点，说明此链接以使用，断开连接，输出当前节点
+                if(temp.right == root){
+                    temp.right = null;
+                    if(pre != null && pre.val > root.val){
+                        y = root;
+                        if(x == null){
+                            x = pre;
+                        }
+                    }
+                    pre = root;
+                    root = root.right;
+                }
             }else{
-
+                //当前节点无左子节点，输出当前节点，
+                if(pre != null && pre.val > root.val){
+                    y = root;
+                    if(x == null){
+                        x = pre;
+                    }
+                }
+                pre = root;
+                root = root.right;
             }
+        }
+        if(x != null && y != null){
+            int val = x.val;
+            x.val = y.val;
+            y.val = val;
         }
     }
 
-    public void swap(TreeNode a, TreeNode b) {
-        int tmp = a.val;
-        a.val = b.val;
-        b.val = tmp;
-    }
 }
