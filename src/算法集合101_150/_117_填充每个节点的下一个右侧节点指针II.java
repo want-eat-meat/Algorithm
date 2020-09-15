@@ -74,23 +74,48 @@ package 算法集合101_150;
 
 import source.Node;
 
+/**
+ * 0ms
+ * 39.9MB
+ */
 public class _117_填充每个节点的下一个右侧节点指针II {
     public Node connect(Node root) {
         if(root == null) return root;
         Node node = root;
-        node.next = null;
-        while(node.next != null || node.left != null || node.right != null){
+        Node nextLevel = null;
+        Node index = null;
+        while(node != null) {
             if(node.left == null && node.right == null){
                 node = node.next;
+            }else if(node.left != null && node.right != null){
+                if(nextLevel == null){
+                    nextLevel = node.left;
+                }else{
+                    index.next = node.left;
+                }
+                node.left.next = node.right;
+                index = node.right;
+                node = node.next;
+            }else if(node.left != null){
+                if(nextLevel == null){
+                    nextLevel = node.left;
+                }else{
+                    index.next = node.left;
+                }
+                index = node.left;
+                node = node.next;
+            }else{
+                if(nextLevel == null){
+                    nextLevel = node.right;
+                }else{
+                    index.next = node.right;
+                }
+                index = node.right;
+                node = node.next;
             }
-            Node temp = node;
-            while(temp != null) {
-                if (temp.left != null && temp.right != null) {
-                    temp.left.next = temp.right;
-                }
-                if(temp.next != null){
-
-                }
+            if(node == null){
+                node = nextLevel;
+                nextLevel = null;
             }
         }
         return root;

@@ -47,6 +47,8 @@
 // 👍 233 👎 0
 package 算法集合101_150;
 
+import javax.sound.midi.Soundbank;
+
 public class _115_不同的子序列 {
     /**
      * 动态规划
@@ -56,7 +58,7 @@ public class _115_不同的子序列 {
      * @param t
      * @return
      */
-    public int numDistinct(String s, String t) {
+   /* public static int numDistinct(String s, String t) {
         if(s == null || t == null || s.length() == 0 || t.length() == 0) return 0;
         int sLen = s.length();
         int tLen = t.length();
@@ -66,10 +68,41 @@ public class _115_不同的子序列 {
             dp[i][0] = dp[i-1][0] + (s.charAt(i)==t.charAt(0) ? 1 : 0);
         }
         for(int j = 1; j < tLen; j++){
-            for(int i = j + 1; i < sLen; i++){
+            for(int i = j; i < sLen; i++){
                 dp[i][j] = dp[i-1][j] + (s.charAt(i)==t.charAt(j) ? dp[i-1][j-1] : 0);
             }
         }
         return dp[sLen - 1][tLen - 1];
+    }*/
+
+    /**
+     * 一维动态规划
+     * 7ms
+     * 37.5MB
+     * @param s
+     * @param t
+     * @return
+     */
+    public int numDistinct(String s, String t) {
+        if(s == null || t == null || s.length() == 0 || t.length() == 0) return 0;
+        int sLen = s.length();
+        int tLen = t.length();
+        if(sLen < tLen) return 0;
+        int[] dp = new int[sLen];
+        dp[0] = s.charAt(0) == t.charAt(0) ? 1 : 0;
+        for(int i = 1; i < sLen; i++){
+            dp[i] = dp[i-1] + (s.charAt(i)==t.charAt(0) ? 1 : 0);
+        }
+        for(int j = 1; j < tLen; j++){
+            int pre = 0;
+            int temp = dp[j - 1];
+            for(int i = j; i < sLen; i++){
+                int last = temp;
+                temp = dp[i];
+                dp[i] = pre + (s.charAt(i) == t.charAt(j) ? last : 0);
+                pre = dp[i];
+            }
+        }
+        return dp[sLen - 1];
     }
 }

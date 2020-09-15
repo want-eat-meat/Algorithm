@@ -20,13 +20,17 @@ package 算法集合1_50;
 //
 // Related Topics 数组 哈希表 双指针
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class _18_四数之和 {
     /**
      * 27ms
      * 40.1MB
      * 双指针
      */
-   /* public List<List<Integer>> fourSum(int[] nums, int target) {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> resultList= new ArrayList<>();
         if(nums.length < 4) {return resultList;}
         Arrays.sort(nums);
@@ -61,11 +65,4 @@ public class _18_四数之和 {
         }
         return resultList;
     }
-    */
-   /*
-   public List<List<Integer>> fourSum(int[] nums, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        Map<Integer, ArrayList<ArrayList<Integer>>> resultMap = new HashMap<>();
-    }
-    */
 }
