@@ -54,7 +54,6 @@ public class _60_第k个排列 {
         int mol = n - 1;
         while(k > 0 && !nums.isEmpty()){
             for(int i = mol; i > 0; i--){
-                System.out.println(k + "-" + product[i]);
                 if(!nums.isEmpty()) {
                     int index = (k - 1) / product[i];
                     sb.append(nums.get(index));

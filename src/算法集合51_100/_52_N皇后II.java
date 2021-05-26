@@ -35,6 +35,7 @@
 // Related Topics 回溯算法
 package 算法集合51_100;
 
+
 /**
  * 回溯+位运算剪枝
  * 0ms
@@ -63,4 +64,5 @@ public class _52_N皇后II {
     public int totalNQueens(int n) {
         return backtrack(0, 0, 0, 0, 0, n);
     }
+
 }

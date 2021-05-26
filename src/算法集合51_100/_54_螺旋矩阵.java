@@ -32,15 +32,7 @@ import java.util.List;
  * 37.3MB
  */
 public class _54_螺旋矩阵 {
-    public static void main(String[] args) {
-        int[][] a = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
-        System.out.println(spiralOrder(a));
-    }
-    public static List<Integer> spiralOrder(int[][] matrix) {
+    public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         int row;
         int col;
